@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 
 @Component({
@@ -10,10 +10,22 @@ export class InputAddressComponent implements AfterViewInit {
   private accessToken =
     'pk.eyJ1IjoiZHltYWZyIiwiYSI6ImNsODNjMmp4MTAwY2UzcHA4ZWhmaG5sNDAifQ.ozVmzxmotxaZbXfnvHKYDw';
   private map!: mapboxgl.Map;
+  private autocomplete!: MapboxGeocoder;
 
   constructor() {}
 
   ngAfterViewInit() {
+    this.autocomplete = new MapboxGeocoder({
+      accessToken: this.accessToken,
+      mapboxgl: mapboxgl,
+    });
+
+    this.autocomplete.on('result', (e: any) => {
+      if (e.result) {
+        console.log(e);
+      }
+    });
+
     this.map = new mapboxgl.Map({
       accessToken: this.accessToken,
       container: 'map',
@@ -21,5 +33,7 @@ export class InputAddressComponent implements AfterViewInit {
       zoom: 9,
       center: [-74.5, 40],
     });
+
+    this.map.addControl(this.autocomplete);
   }
 }
