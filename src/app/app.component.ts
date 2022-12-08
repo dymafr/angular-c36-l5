@@ -7,14 +7,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  public form: FormGroup;
+  public form = this.fb.group({
+    name: [''],
+    code: [''],
+  });
 
   constructor(public fb: FormBuilder) {}
-
-  ngOnInit() {
-    this.form = this.fb.group({
-      name: [''],
-      code: [''],
-    });
-  }
 }
