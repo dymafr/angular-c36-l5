@@ -1,6 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
-import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 
 @Component({
   selector: 'app-input-address',
